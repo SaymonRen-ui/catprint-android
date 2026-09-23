@@ -1,0 +1,31 @@
+name: build-apk
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Демон требует тулчейн 25 (gradle/gradle-daemon-jvm.properties),
+      # код при этом компилируется под Java 17 (см. app/build.gradle.kts)
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Tests + Debug APK
+        run: ./gradlew :app:testDebugUnitTest :app:assembleDebug
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: app/build/outputs/apk/debug/CatPrint.apk
