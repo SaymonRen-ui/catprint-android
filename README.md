@@ -1,8 +1,12 @@
 # CatPrint Android
 
-Мобильный CatPrint для MXW01: телефон, планшет, FydeOS (Android-подсистема).
-Протокол печати перенесён побайтово с десктопа (A2/A9/AD, CRC8, LSB),
-формат документов `.catdoc` v2 общий с ПК — файлы открываются там и там.
+Мобильная печать на карманном термопринтере MXW01 — для тех, у кого принтер
+живёт в сумке, а не у компьютера: ценники, записки, QR-коды, фото-стикеры
+прямо с телефона или планшета. Подключение по BLE, бумага 57 мм (384 точки).
+
+Старший брат — [CatPrint для ПК (WPF)](https://github.com/SaymonRen-ui/catprint):
+протокол печати перенесён оттуда побайтово (A2/A9/AD, CRC8, LSB), а формат
+документов `.catdoc` v2 общий — файлы открываются и там, и там.
 
 ## Скриншоты (планшет)
 ![Редактор](screenshots/editor.png)
@@ -16,7 +20,7 @@
 
 ## Сборка
 1. Открыть папку в Android Studio (или `gradlew`).
-2. `gradlew assembleDebug` → `app/build/outputs/apk/debug/app-debug.apk`.
+2. `gradlew assembleDebug` → `app/build/outputs/apk/debug/CatPrint.apk`.
 3. Юнит-тесты ядра (без устройства): `gradlew :app:testDebugUnitTest`.
    Проверяют CRC/команды/упаковку бит/дизеринги теми же векторами, что и ПК.
 
